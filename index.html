@@ -1,0 +1,101 @@
+
+
+
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+
+
+    <style type="text/css">
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      body * {
+        position: absolute;
+      }
+
+    </style>
+
+    <body></body>
+    <script>
+      function genTokenData(projectNum) {
+
+        const queryParams = window.location.search
+          ? window.location.search.replace('?', '').split('&').reduce((params, i) => {
+              const [k, v] = i.split('=')
+              params[k] = v
+              return params
+            }, {})
+          : {}
+
+        let hash = '0x'
+        if (queryParams.hash) {
+          hash = queryParams.hash
+        } else {
+          for (let i = 0; i < 64; i++) {
+            hash += Math.floor(Math.random() * 16).toString(16)
+          }
+          window.location.hash = '#' + hash
+
+          const last10hashes = JSON.parse(localStorage.getItem('last10Hashes')) || []
+          last10hashes.unshift(hash)
+
+          localStorage.setItem('last10Hashes', JSON.stringify(last10hashes.slice(0, 10)))
+
+        }
+
+
+        let tokenId = queryParams.tokenId
+        if (!tokenId) {
+          tokenId = String(projectNum * 1000000 + Math.floor(Math.random() * 64))
+        }
+
+        return {
+          hash,
+          tokenId,
+        }
+      }
+
+      const tokenData = genTokenData(0)
+      console.log(tokenData.hash)
+    </script>
+
+    <script src="./utils.js"></script>
+    <script src="./colors.js"></script>
+    <script src="./svg.js"></script>
+    <script src="./index.js"></script>
+
+
+
+
+
+
+    <script type="text/javascript">
+      document.body.style.background = '#333'
+    </script>
+
+
+
+    <script type="text/javascript">
+
+
+      // drawInnerBorders(0.375*SIZE/GRID_SIZE, {stroke: pen.white, strokeWidth: STROKE_WIDTH})
+
+      // lineList.forEach(l => {
+      //   if (l.y1 === l.y2) {
+      //     if (l.y1)
+      //   }
+      // })
+
+
+
+    </script>
+
+  </head>
+</html>
