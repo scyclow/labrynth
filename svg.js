@@ -51,6 +51,7 @@ class SVG {
     const stroke = args.stroke || pen.black
     const opacity = args.opacity || 1
     const lineCap = args.lineCap || 'round'
+    const dasharray = args.dasharray || 1
 
     const line = document.createElementNS(__ns, 'line')
 
@@ -59,6 +60,7 @@ class SVG {
     line.setAttribute('stroke-linecap', lineCap)
     line.setAttribute('stroke-width', `${strokeWidth}px`)
     line.setAttribute('stroke-opacity', opacity)
+    line.setAttribute('stroke-dasharray', dasharray)
     line.setAttribute('x1', x1)
     line.setAttribute('x2', x2)
     line.setAttribute('y1', y1)
@@ -77,39 +79,39 @@ class SVG {
 
 
 
-  // drawPath(x, y, d, args={}) {
-  //   const isLetter = args.isLetter || false
-  //   const fill = args.fill || 'none'
-  //   const fillOpacity = args.fillOpacity || 0.65
-  //   const size = args.size || 1.5
-  //   const stroke = args.stroke || pen.black
-  //   const rotation = args.rotation || 0
-  //   const strokeWidth = args.strokeWidth || 3 * 1.5/size
-  //   const className = args.className || ''
-  //   const ignoreMount = args.ignoreMount || false
-  //   const gClass = args.gClass || ''
-  //   const gStyle = args.gStyle || ''
-  //   const strokeOpacity = args.strokeOpacity || ''
-  //   let path = document.createElementNS(__ns, 'path')
+  drawPath(x, y, d, args={}) {
+    const isLetter = args.isLetter || false
+    const fill = args.fill || 'none'
+    const fillOpacity = args.fillOpacity || 0.65
+    // const size = args.size || 1.5
+    const stroke = args.stroke || pen.black
+    const rotation = args.rotation || 0
+    const strokeWidth = args.strokeWidth || 3 * 1.5/size
+    const className = args.className || ''
+    // const ignoreMount = args.ignoreMount || false
+    const gClass = args.gClass || ''
+    const gStyle = args.gStyle || ''
+    const strokeOpacity = args.strokeOpacity || ''
+    let path = document.createElementNS(__ns, 'path')
 
-  //   path.setAttribute('stroke-opacity', strokeOpacity)
-  //   path.setAttribute('fill', fill)
-  //   path.setAttribute('fill-opacity', fillOpacity)
-  //   path.setAttribute('stroke', stroke)
-  //   path.setAttribute('stroke-linecap', `round`)
-  //   path.setAttribute('stroke-linejoin', `round`)
-  //   path.setAttribute('stroke-width', `${strokeWidth}px`)
-  //   path.setAttribute('style', `transform: translate(${x}px, ${y}px) scale(${size}) rotate(${rotation}deg)`)
-  //   path.setAttribute('class', className)
+    path.setAttribute('stroke-opacity', strokeOpacity)
+    path.setAttribute('fill', fill)
+    path.setAttribute('fill-opacity', fillOpacity)
+    path.setAttribute('stroke', stroke)
+    path.setAttribute('stroke-linecap', `round`)
+    path.setAttribute('stroke-linejoin', `round`)
+    path.setAttribute('stroke-width', `${strokeWidth}px`)
+    // path.setAttribute('style', `transform: translate(${x}px, ${y}px) scale(${size}) rotate(${rotation}deg)`)
+    path.setAttribute('class', className)
 
-  //   path.setAttribute('d', d)
+    path.setAttribute('d', d)
 
 
-  //   if (!ignoreMount) {
-  //     this.addToLayer(path, stroke, strokeWidth/1.5*size, gClass)
-  //   }
-  //   return path
-  // }
+    // if (!ignoreMount) {
+    //   this.addToLayer(path, stroke, strokeWidth/1.5*size, gClass)
+    // }
+    return path
+  }
 
 
   // drawRect(x, y, w, h, args={}) {

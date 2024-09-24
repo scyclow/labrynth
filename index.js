@@ -10,10 +10,6 @@ const FILLER_RINGS = chance(
 )
 
 
-const FILLER_SPACING = rnd(0.125, 0.2) * (2 / (FILLER_RINGS||1))
-
-const PADDING = (FILLER_RINGS+1)*FILLER_SPACING*SIZE/GRID_SIZE
-
 const thickProb =
   GRID_SIZE > 9 ? 0.25 :
   GRID_SIZE < 7 ? 1 :
@@ -24,9 +20,8 @@ const STROKE_WIDTH_1 = 8
 const STROKE_WIDTH_2 = STROKE_WIDTH === 'thick' ? 8 : 5
 const HIDE_DIVISOR_LINE = FILLER_RINGS ? prb(0.25) : false
 
-const DENSE = prb(0.9)
+const DENSE = prb(0.875)
 
-svg = new SVG(SIZE + PADDING*2, SIZE + PADDING*2)
 
 const COLOR_COUNT = chance(
   [1, 1],
@@ -60,7 +55,6 @@ if (DARK_COLOR_SCHEME) {
   ]
 }
 
-svg.svg.style.background = BG_COLOR
 
 const DIVISOR_STROKE_COLOR = sample(COLOR_PALETTE)
 const FILLER_STROKE_COLOR = COLOR_COUNT === 1 || HIDE_DIVISOR_LINE
@@ -72,20 +66,25 @@ const FILLER_STROKE_ALT_COLOR = COLOR_COUNT < 3
   : sample(COLOR_PALETTE)
 
 
+
+const FILLER_SPACING = rnd(0.125, 0.2) * (2 / (FILLER_RINGS||1))
+const PADDING = (FILLER_RINGS+1)*FILLER_SPACING*SIZE/GRID_SIZE
 let LINE_COUNT = GRID_SIZE
 
+const svg = new SVG(SIZE + PADDING*2, SIZE + PADDING*2)
+svg.svg.style.background = BG_COLOR
 
 
 
-console.log({
-  G: GRID_SIZE,
-  F: FILLER_RINGS,
-  P1: penName(DIVISOR_STROKE_COLOR, STROKE_WIDTH_1),
-  P2: penName(FILLER_STROKE_COLOR, STROKE_WIDTH_2),
-  P3: penName(FILLER_STROKE_ALT_COLOR, STROKE_WIDTH_2),
-  IMAGINED_DIVISORS: HIDE_DIVISOR_LINE,
-  MAX_10_DIVISORS: DENSE
-})
+// console.log({
+//   G: GRID_SIZE,
+//   F: FILLER_RINGS,
+//   P1: penName(DIVISOR_STROKE_COLOR, STROKE_WIDTH_1),
+//   P2: penName(FILLER_STROKE_COLOR, STROKE_WIDTH_2),
+//   P3: penName(FILLER_STROKE_ALT_COLOR, STROKE_WIDTH_2),
+//   IMAGINED_DIVISORS: HIDE_DIVISOR_LINE,
+//   MAX_10_DIVISORS: DENSE
+// })
 
 
 
